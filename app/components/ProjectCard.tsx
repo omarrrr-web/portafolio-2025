@@ -1,62 +1,63 @@
-"use client";
-import { FaGithub, FaLayerGroup, FaDatabase } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { FaExternalLinkAlt } from "react-icons/fa"; // Asegúrate de importar el icono
 
-interface ProjectProps {
+interface ProjectCardProps {
   title: string;
+  type: string;
   description: string;
   role: string;
   techStack: string[];
-  type: string; // Ej: "Escritorio", "Web"
+  link?: string; // <--- NUEVO: Opcional, por si algún proyecto no tiene link
 }
 
-export default function ProjectCard({ title, description, role, techStack, type }: ProjectProps) {
+export default function ProjectCard({ title, type, description, role, techStack, link }: ProjectCardProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.5 }}
+    <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-8 hover:border-blue-500/50 transition-all group relative overflow-hidden">
 
-      className="w-full bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition-colors"
-    >
-      <div className="p-6">
-        <div className="flex justify-between items-start mb-4">
-          <h3 className="text-xl font-bold text-white">{title}</h3>
-          {type && (
-            <span className="px-2 py-1 text-xs font-medium text-slate-400 bg-slate-800 rounded-full border border-slate-700">
-              {type}
-            </span>
-          )}
-        </div>
-        <p className="text-slate-400 mb-6">
-          {description}
-        </p>
-
-        <div className="bg-slate-950/50 border border-slate-800 rounded-xl p-4 mb-6 relative overflow-hidden">
-          <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-500"></div>
-          <h4 className="text-sm font-bold text-slate-200 mb-1 flex items-center gap-2">
-            <FaLayerGroup className="text-blue-500" /> Mi Rol:
-          </h4>
-          <p className="text-sm text-slate-400">
-            {role}
-          </p>
+      {/* Encabezado con Link */}
+      <div className="flex justify-between items-start mb-4">
+        <div>
+          <span className="text-blue-400 text-xs font-bold uppercase tracking-wider mb-2 block">
+            {type}
+          </span>
+          <h3 className="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
+            {title}
+          </h3>
         </div>
 
-        {/* Footer: Tecnologías y Botón */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-4 border-t border-slate-800/50">
-
-          {/* Lista de tecnologías (Tags) */}
-          <div className="flex flex-wrap gap-2">
-            {techStack.map((tech, index) => (
-              <span key={index} className="px-3 py-1 text-xs font-medium text-slate-400 bg-slate-800 rounded-lg flex items-center gap-1">
-                {index === 0 && <FaDatabase className="text-xs" />} {/* Icono solo en el primero como adorno */}
-                {tech}
-              </span>
-            ))}
-          </div>
-        </div>
+        {/* Botón de enlace (Solo aparece si pasamos un link) */}
+        {link && (
+          <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-3 bg-slate-800 hover:bg-blue-600 text-slate-400 hover:text-white rounded-xl transition-all"
+            title="Ver Proyecto en vivo"
+          >
+            <FaExternalLinkAlt />
+          </a>
+        )}
       </div>
-    </motion.div>
+
+      <p className="text-slate-400 mb-6 leading-relaxed">
+        {description}
+      </p>
+
+      <div className="mb-6">
+        <strong className="text-slate-200 text-sm block mb-2">Mi Rol:</strong>
+        <p className="text-slate-400 text-sm">{role}</p>
+      </div>
+
+      {/* Tags */}
+      <div className="flex flex-wrap gap-2">
+        {techStack.map((tech) => (
+          <span
+            key={tech}
+            className="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-300 font-mono"
+          >
+            {tech}
+          </span>
+        ))}
+      </div>
+    </div>
   );
 }
