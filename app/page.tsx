@@ -266,7 +266,7 @@ export default function Home() {
             description="Plataforma de comercio electrónico con gestión de inventario en tiempo real. Incluye panel de administración protegido, carrito de compras persistente, filtros dinámicos y checkout integrado con WhatsApp."
             role="Arquitectura completa: Desarrollo del Frontend, diseño de Base de Datos en Supabase, autenticación y lógica de negocio (CRUD)."
             techStack={["Next.js 15", "TypeScript", "Supabase", "Tailwind CSS", "Zustand"]}
-            link="https://techzone-store.vercel.app/"
+            link="https://techzone-store-i2bm.vercel.app/"
           />
           <ProjectCard
             title="Sistema de Ventas N-Capas"

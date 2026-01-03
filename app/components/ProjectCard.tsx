@@ -24,7 +24,7 @@ export default function ProjectCard({ title, type, description, role, techStack,
           </h3>
         </div>
 
-        {/* Botón de enlace (Solo aparece si pasamos un link) */}
+        {/* Botón de enlace */}
         {link && (
           <a
             href={link}
